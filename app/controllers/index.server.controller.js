@@ -5,6 +5,7 @@ exports.render = function(req,res){
 	}
 	
 	req.session.lastVisit = new Date();
+	//console.log("index page requested");
 	
 	res.render('index',{title: 'Hello World'});
 };
