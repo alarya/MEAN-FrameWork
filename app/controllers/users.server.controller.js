@@ -30,8 +30,9 @@ exports.renderSignin = function(req,res,next){
 			title: 'Sign-in Form',
 			messages: req.flash('error') || req.flash('info')
 		});
-	}else
-	return res.redirect('/');
+	}else{
+		return res.redirect('/');
+	}
 };
 
 //Renders the sign-up page
@@ -46,7 +47,7 @@ exports.renderSignup = function(req,res,next){
 	}	
 };
 
-//To create new users
+//To create new users	
 exports.signup = function(req,res,next){
 	if(!req.user){
 		var user = new User(req.body);
@@ -132,12 +133,12 @@ exports.update = function(req,res,next){
 
 //delete a user by it's id
 //This is also not working correctly.. will come back to it
-exports.delete = function(req,res,next){
-	req.user.remove(function(err){
-		if(err){
-			return next(err);
-		}else{
-			res.json(req.user);
-		}
-	});
-};
+//exports.delete = function(req,res,next){
+//	req.user.remove(function(err){
+//		if(err){
+//			return next(err);
+//		}else{
+//			res.json(req.user);
+//		}
+//	});
+//};

@@ -81,7 +81,7 @@ UserSchema.methods.hashPassword = function(password){
 
 //A prototype of custome instance method
 UserSchema.methods.authenticate = function(password){
-	return this.password === password;	
+	return this.password === this.hashPassword(password);	
 };
 
 UserSchema.statics.findUniqueUsername = function(username,suffix,callback){
@@ -102,7 +102,7 @@ UserSchema.statics.findUniqueUsername = function(username,suffix,callback){
 };
 
 mongoose.model('User', UserSchema);
-UserSchema.set('toJSON', {getters:true, virtuals:true});
+//UserSchema.set('toJSON', {getters:true, virtuals:true});
 
 
 //A prototype of model static method which searches a user by username property

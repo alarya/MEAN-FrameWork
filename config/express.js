@@ -8,6 +8,7 @@ var config = require('./config'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
 	session = require('express-session'),
+	flash = require('connect-flash'),
 	passport = require('passport');
 	
 
@@ -18,7 +19,7 @@ module.exports = function(){
 	if (process.env.NODE_ENV === 'development'){
 		app.use(morgan('dev'));		
 	}else if (process.env.NODE_ENV === 'production'){
-		app.use(compress);
+		app.use(compress());
 	}
 	
 	app.use(bodyParser.urlencoded({
@@ -37,13 +38,14 @@ module.exports = function(){
 	app.set('views','./app/views');
 	app.set('view engine', 'ejs');
 	
+	app.use(flash());
 	app.use(passport.initialize());
 	app.use(passport.session());
 	
 	require('../app/routes/index.server.routes.js')(app);
 	require('../app/routes/users.server.routes.js')(app);
 	
-	app.use(express.static('./public'));
+	app.use(express.static('./public'));   //Express would first try to look for HTTP request paths in static files folder
 	
 	return app;
 };
